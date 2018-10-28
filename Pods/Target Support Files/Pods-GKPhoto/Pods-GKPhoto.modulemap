@@ -1,0 +1,6 @@
+framework module Pods_GKPhoto {
+  umbrella header "Pods-GKPhoto-umbrella.h"
+
+  export *
+  module * { export * }
+}
