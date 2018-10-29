@@ -21,12 +21,6 @@ class GKPhotoCell: UICollectionViewCell {
         didSet {
             selectButton.backgroundColor = assetSelected ?  UIColor.blue : UIColor.init(white: 0.0, alpha: 0.3)
             grayMask.isHidden = !assetSelected
-
-            UIView.animate(withDuration: TimeInterval.init(0.25), delay: TimeInterval.init(0.1), usingSpringWithDamping: CGFloat(0.1), initialSpringVelocity: CGFloat(0.5), options: UIView.AnimationOptions.curveEaseInOut, animations: { [weak self] in
-                self?.selectButton.transform = CGAffineTransform.init(scaleX: 0.8, y: 0.8)
-            }) { [weak self] (_) in
-//                self?.selectButton.transform = CGAffineTransform.identity
-            }
         }
     }
 
@@ -37,6 +31,12 @@ class GKPhotoCell: UICollectionViewCell {
             } else {
                 selectButton.setTitle("", for: UIControl.State.normal)
             }
+        }
+    }
+
+    var canSelect: Bool = true {
+        didSet {
+            grayMask.isHidden = canSelect
         }
     }
 
@@ -62,7 +62,7 @@ class GKPhotoCell: UICollectionViewCell {
         }
 
         selectButton.snp.makeConstraints { (make) in
-            make.right.top.equalToSuperview()
+            make.right.top.equalToSuperview().inset(3)
             make.width.height.equalTo(24)
         }
     }
@@ -71,7 +71,7 @@ class GKPhotoCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         grayMask.backgroundColor = UIColor.gray
-        grayMask.alpha = 0.3
+        grayMask.alpha = 0.7
         grayMask.isHidden = true
 
         selectButton.backgroundColor = UIColor.blue
@@ -83,6 +83,7 @@ class GKPhotoCell: UICollectionViewCell {
     }
 
     @objc func selectThisPhoto() {
+        if !canSelect { return }
         self.assetSelected = !assetSelected
         selectionHandler?(assetSelected)
     }

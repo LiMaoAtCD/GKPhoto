@@ -71,15 +71,15 @@ extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDel
             imageManager.cancelImageRequest(PHImageRequestID.init(cell.tag))
         }
         cell.tag = Int(imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil) { (image, _) in
-                if cell.representedAssetIdentifier == asset.localIdentifier {
-                    cell.thumbnailImage = image
-                    if let index = GKHelper.default.identifiers.firstIndex(of: cell.representedAssetIdentifier) {
-                        cell.assetSelected = true
-                        cell.assetOrder = index + 1
-                    } else {
-                        cell.assetSelected = false
-                        cell.assetOrder = 0
-                    }
+                cell.thumbnailImage = image
+                if let index = GKHelper.default.identifiers.firstIndex(of: cell.representedAssetIdentifier) {
+                    cell.assetSelected = true
+                    cell.assetOrder = index + 1
+                    cell.canSelect = true
+                } else {
+                    cell.assetSelected = false
+                    cell.assetOrder = 0
+                    cell.canSelect = !GKHelper.default.isMaxNumber()
                 }
         })
 
@@ -87,12 +87,21 @@ extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDel
             [weak self] selected in
             if selected {
                 GKHelper.default.insert(asset.localIdentifier, indexPath: indexPath)
+                if GKHelper.default.isMaxNumber() {
+                    collectionView.reloadData()
+                }
+                self?.updateCells()
             } else {
+                if GKHelper.default.isMaxNumber() {
+                    // 达到最大选择数后, 取消
+                    collectionView.reloadData()
+                }
+
                 GKHelper.default.delete(asset.localIdentifier)
                 cell.assetSelected = selected
                 cell.assetOrder = 0
+                self?.updateCells()
             }
-            self?.updateCells()
         }
         return cell
     }
