@@ -107,6 +107,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		313D56A5218706470011B69B /* GKPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				87C8AA602185EE4500ADB3FC /* GKAssetDetailViewController.swift */,
+				87C8AA5E21858D8300ADB3FC /* GKPhotoViewController.swift */,
+				313D56A32186A88A0011B69B /* GKHelper.swift */,
+				313D56A12186A4150011B69B /* GKPhotoCell.swift */,
+			);
+			path = GKPhoto;
+			sourceTree = "<group>";
+		};
 		87D8BAA421841BB200354857 = {
 			isa = PBXGroup;
 			children = (
@@ -132,12 +143,9 @@
 		87D8BAAF21841BB200354857 /* GKPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				313D56A5218706470011B69B /* GKPhoto */,
 				87D8BAB021841BB200354857 /* AppDelegate.swift */,
 				87D8BAB221841BB200354857 /* ViewController.swift */,
-				87C8AA5E21858D8300ADB3FC /* GKPhotoViewController.swift */,
-				313D56A32186A88A0011B69B /* GKHelper.swift */,
-				313D56A12186A4150011B69B /* GKPhotoCell.swift */,
-				87C8AA602185EE4500ADB3FC /* GKAssetDetailViewController.swift */,
 				87D8BAB421841BB200354857 /* Main.storyboard */,
 				87D8BAB721841BB500354857 /* Assets.xcassets */,
 				87D8BAB921841BB500354857 /* LaunchScreen.storyboard */,

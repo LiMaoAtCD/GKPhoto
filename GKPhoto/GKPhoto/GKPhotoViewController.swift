@@ -116,8 +116,10 @@ extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let controller = GKAssetDetailViewController()
-        controller.asset = fetchResult.object(at: indexPath.item)
+        controller.fetchResult = fetchResult
+        controller.currentIndexPath = indexPath
         navigationController?.pushViewController(controller, animated: true)
+
     }
 }
 
