@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		313D56A22186A4150011B69B /* GKPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313D56A12186A4150011B69B /* GKPhotoCell.swift */; };
+		313D56A42186A88A0011B69B /* GKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313D56A32186A88A0011B69B /* GKHelper.swift */; };
 		3788D2B529D60DF7D27123D1 /* Pods_GKPhoto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BEC8266F997C8902A459F /* Pods_GKPhoto.framework */; };
 		87C8AA5F21858D8300ADB3FC /* GKPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C8AA5E21858D8300ADB3FC /* GKPhotoViewController.swift */; };
 		87C8AA612185EE4500ADB3FC /* GKAssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C8AA602185EE4500ADB3FC /* GKAssetDetailViewController.swift */; };
@@ -42,6 +44,8 @@
 		0EE620316BD8297C9756858E /* Pods_GKPhotoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GKPhotoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2166E6E6104071BB5D0DA4E4 /* Pods-GKPhotoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKPhotoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GKPhotoUITests/Pods-GKPhotoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		236BEC8266F997C8902A459F /* Pods_GKPhoto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GKPhoto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		313D56A12186A4150011B69B /* GKPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKPhotoCell.swift; sourceTree = "<group>"; };
+		313D56A32186A88A0011B69B /* GKHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKHelper.swift; sourceTree = "<group>"; };
 		40626908BE078F2D60BBD80C /* Pods-GKPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKPhoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKPhoto/Pods-GKPhoto.release.xcconfig"; sourceTree = "<group>"; };
 		457E5B2564F451B382805BC0 /* Pods-GKPhotoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKPhotoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKPhotoUITests/Pods-GKPhotoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DDC3910CC64C7A26E5E60E7 /* Pods-GKPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKPhoto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GKPhoto/Pods-GKPhoto.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				87D8BAB021841BB200354857 /* AppDelegate.swift */,
 				87D8BAB221841BB200354857 /* ViewController.swift */,
 				87C8AA5E21858D8300ADB3FC /* GKPhotoViewController.swift */,
+				313D56A32186A88A0011B69B /* GKHelper.swift */,
+				313D56A12186A4150011B69B /* GKPhotoCell.swift */,
 				87C8AA602185EE4500ADB3FC /* GKAssetDetailViewController.swift */,
 				87D8BAB421841BB200354857 /* Main.storyboard */,
 				87D8BAB721841BB500354857 /* Assets.xcassets */,
@@ -384,7 +390,9 @@
 				87C8AA612185EE4500ADB3FC /* GKAssetDetailViewController.swift in Sources */,
 				87C8AA5F21858D8300ADB3FC /* GKPhotoViewController.swift in Sources */,
 				87D8BAB321841BB200354857 /* ViewController.swift in Sources */,
+				313D56A22186A4150011B69B /* GKPhotoCell.swift in Sources */,
 				87D8BAB121841BB200354857 /* AppDelegate.swift in Sources */,
+				313D56A42186A88A0011B69B /* GKHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
