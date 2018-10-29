@@ -22,20 +22,28 @@ class GKPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchImageAssets()
+        setupViews()
+        addSelectionNotification()
+    }
+
+    func fetchImageAssets() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-//        fetchResult = PHAsset.fetchAssets(with: fetchOptions)
         fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
+    }
 
+    func setupViews() {
         let width = (UIScreen.main.bounds.size.width - 4) / 4
-        thumbnailSize = CGSize.init(width: width, height: width)
-        collectionViewFlowLayout.itemSize = thumbnailSize
+        let size = CGSize.init(width: width, height: width)
+        collectionViewFlowLayout.itemSize = size
         collectionViewFlowLayout.minimumLineSpacing = 1
         collectionViewFlowLayout.minimumInteritemSpacing = 1
         collectionViewFlowLayout.scrollDirection = .vertical
         collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
         collectionView.snp.makeConstraints { (make) in
@@ -43,11 +51,14 @@ class GKPhotoViewController: UIViewController {
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.bottom.equalTo(bottomLayoutGuide.snp.top)
         }
-        addSelectionNotification()
+        thumbnailSize = CGSize.init(width: width * UIScreen.main.bounds.width, height: width * UIScreen.main.bounds.width)
     }
-    
+
     func addSelectionNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.selectionStatusChanged(notification:)), name: NSNotification.Name.init("GK_Select"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.selectionStatusChanged(notification:)),
+                                               name: NSNotification.Name.init("GK_Select"),
+                                               object: nil)
     }
     
     @objc func selectionStatusChanged(notification: Notification) {
@@ -57,15 +68,6 @@ class GKPhotoViewController: UIViewController {
             collectionView.reloadData()
         }
     }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let scale = UIScreen.main.scale
-        let cellSize = collectionViewFlowLayout.itemSize
-        thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
-    }
-
 }
 
 extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -81,8 +83,10 @@ extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as! PhotoCell
         let asset = fetchResult.object(at: indexPath.item)
         cell.representedAssetIdentifier = asset.localIdentifier
-        print(asset.localIdentifier)
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil) { [weak self] (image, _) in
+        if cell.tag != 0 {
+            imageManager.cancelImageRequest(PHImageRequestID.init(cell.tag))
+        }
+        cell.tag = Int(imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil) { [weak self] (image, _) in
                 guard let self = self else { return }
                 if cell.representedAssetIdentifier == asset.localIdentifier {
                     cell.thumbnailImage = image
@@ -94,7 +98,7 @@ extension GKPhotoViewController: UICollectionViewDataSource, UICollectionViewDel
                         cell.assetOrder = 0
                     }
                 }
-        }
+        })
         return cell
     }
     
